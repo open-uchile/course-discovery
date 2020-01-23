@@ -9,10 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Pull latest cache
-        run: docker pull eoluchile/course-discovery:latest
-
-      - name: Build OpenedX
+      - name: Build Docker image
         run: docker build . --file .github/Dockerfile --tag eoluchile/course-discovery:${GITHUB_SHA} --tag eoluchile/course-discovery:latest
 
       - name: Push
