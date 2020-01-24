@@ -17,7 +17,9 @@ ENV LC_ALL en_US.UTF-8
 ADD . /openedx/discovery
 WORKDIR /openedx/discovery
 
-RUN make production-requirements && pip3 install python-json-logger==0.1.11
+RUN make production-requirements \
+  && pip3 install python-json-logger==0.1.11 \
+  make static
 
 EXPOSE 8000
 CMD gunicorn --name ecommerce --bind=0.0.0.0:8000 --max-requests=1000 --workers ${WORKER_COUNT:-1} course_discovery.wsgi:application
