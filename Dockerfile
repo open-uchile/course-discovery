@@ -26,6 +26,7 @@ ENV PATH /edx/app/nodeenv/bin:${PATH}
 RUN pip install -r requirements.txt
 RUN npm install --production
 RUN ./node_modules/.bin/bower install --allow-root --production
+RUN make static.dev
 
 EXPOSE 8381
 CMD gunicorn --bind=0.0.0.0:8381 --workers 2 --max-requests=1000 -c /edx/app/discovery/course_discovery/docker_gunicorn_configuration.py course_discovery.wsgi:application
