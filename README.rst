@@ -8,6 +8,27 @@ Course Discovery Service  |Travis|_ |Codecov|_
 
 Service providing access to consolidated course and program metadata.
 
+
+EOL
+------------
+
+Basic discovery setup
+
+```bash
+python manage.py create_or_update_partner \
+    --site-id=1 \
+    --site-domain=staging.eol.espinoza.dev \
+    --code=EOL \
+    --name=Eol \
+    --courses-api-url=https://staging.eol.espinoza.dev/api/courses/v1/ \
+    --lms-url=https://staging.eol.espinoza.dev
+
+python manage.py refresh_course_metadata
+```
+
+The OAuth application clients should be set in the LMS.
+In order to login the oauth/application access must provide the required scopes user_id, profile, email
+
 Documentation
 -------------
 
