@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Build Docker image
-        run: docker build . --tag eoluchile/discovery-juniper:${GITHUB_SHA}
+        run: docker build . --file .github/Dockerfile --tag eoluchile/discovery-juniper:${GITHUB_SHA}
 
       - name: Push
         run: |
