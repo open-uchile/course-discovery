@@ -29,6 +29,8 @@ python manage.py refresh_course_metadata
 The OAuth application clients should be set in the LMS.
 In order to login the oauth/application access must provide the required scopes user_id, profile, email
 
+** In case you change the static serve, remember to update the .github/placeholder.yml file **
+
 Documentation
 -------------
 
