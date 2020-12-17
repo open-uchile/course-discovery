@@ -14,22 +14,23 @@ EOL
 
 Basic discovery setup
 
-```bash
-python manage.py create_or_update_partner \
-    --site-id=1 \
-    --site-domain=staging.eol.espinoza.dev \
-    --code=EOL \
-    --name=Eol \
-    --courses-api-url=https://staging.eol.espinoza.dev/api/courses/v1/ \
-    --lms-url=https://staging.eol.espinoza.dev
+.. code-block:: shell
 
-python manage.py refresh_course_metadata
-```
+    $ python manage.py create_or_update_partner \
+        --site-id=1 \
+        --site-domain=staging.eol.espinoza.dev \
+        --code=EOL \
+        --name=Eol \
+        --courses-api-url=https://staging.eol.espinoza.dev/api/courses/v1/ \
+        --lms-url=https://staging.eol.espinoza.dev \
+        --cms-url=https://studio.staging.eol.espinoza.dev \
+        --courses-api-url=https://staging.eol.espinoza.dev/api/courses/v1/ \
+        --ecommerce-api-url=https://ecommerce.staging.eol.espinoza.dev/api/v2/
+    $ python manage.py refresh_course_metadata --parter-code EOL
+
 
 The OAuth application clients should be set in the LMS.
 In order to login the oauth/application access must provide the required scopes user_id, profile, email
-
-** In case you change the static serve, remember to update the .github/placeholder.yml file **
 
 Documentation
 -------------

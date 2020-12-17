@@ -76,5 +76,4 @@ SOCIAL_AUTH_EDX_OAUTH2_URL_ROOT: https://lms
 SOCIAL_AUTH_EDX_OAUTH2_PUBLIC_URL_ROOT: https://lms
 SOCIAL_AUTH_REDIRECT_IS_HTTPS: true
 STATICFILES_STORAGE: whitenoise.storage.CompressedStaticFilesStorage
-STATIC_ROOT: /edx/app/discovery/course_discovery/static
 TIME_ZONE: UTC

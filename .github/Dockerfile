@@ -27,17 +27,17 @@ RUN pip install -r requirements.txt
 RUN npm install --production
 RUN ./node_modules/.bin/bower install --allow-root --production
 
-EXPOSE 8381
-CMD gunicorn --bind=0.0.0.0:8381 --workers 2 --max-requests=1000 -c /edx/app/discovery/course_discovery/docker_gunicorn_configuration.py course_discovery.wsgi:application
-
-FROM openedx as edx.org
-
 # EOL DIFF
 COPY ./.github/eol.py ./course_discovery/settings/eol.py
 COPY ./.github/placeholder.yml /edx/etc/discovery.yml
 RUN pip install whitenoise==5.2.0
 ENV DJANGO_SETTINGS_MODULE course_discovery.settings.eol
 RUN make static
+
+EXPOSE 8381
+CMD gunicorn --bind=0.0.0.0:8381 --workers 2 --max-requests=1000 -c /edx/app/discovery/course_discovery/docker_gunicorn_configuration.py course_discovery.wsgi:application
+
+FROM openedx as edx.org
 
 RUN pip install newrelic
 CMD newrelic-admin run-program gunicorn --bind=0.0.0.0:8381 --workers 2 --max-requests=1000 -c /edx/app/discovery/course_discovery/docker_gunicorn_configuration.py course_discovery.wsgi:application
