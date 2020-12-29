@@ -26,7 +26,9 @@ Basic discovery setup
         --cms-url=https://studio.staging.eol.espinoza.dev \
         --courses-api-url=https://staging.eol.espinoza.dev/api/courses/v1/ \
         --ecommerce-api-url=https://ecommerce.staging.eol.espinoza.dev/api/v2/
-    $ python manage.py refresh_course_metadata --parter-code EOL
+    $ python manage.py refresh_course_metadata --partner_code EOL
+    $ python manage.py install_es_indexes
+    $ python manage.py update_index --disable-change-limit
 
 
 The OAuth application clients should be set in the LMS.
