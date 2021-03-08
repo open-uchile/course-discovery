@@ -11,6 +11,10 @@ CACHES:
         LOCATION:
         - memcache:11211
 CSRF_COOKIE_SECURE: false
+CORS_ORIGIN_WHITELIST:
+    - https://lms
+    - https://analytics
+    - https://ecommerce
 DATABASES:
     default:
         ATOMIC_REQUESTS: false

@@ -30,8 +30,19 @@ Basic discovery setup
     $ python manage.py install_es_indexes
     $ python manage.py update_index --disable-change-limit
 
-
 The OAuth application clients should be set in the LMS.
+Remember to set both:
+* Discovery oauth with
+    * client type confidential
+    * redirect url https://discovery/complete/edx-oauth2/
+    * authorization grant type authorization code
+    * Skip authorization
+* Discovery Backend
+    * client type confidential
+    * user your_passwordless_service_user
+    * authorization grant type Client Credentials
+    * Skip authorization
+
 In order to login the oauth/application access must provide the required scopes user_id, profile, email
 
 Documentation
