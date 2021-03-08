@@ -1,27 +1,39 @@
-FROM ubuntu:xenial as openedx
+FROM ubuntu:focal as openedx
 
-RUN apt update && \
-  apt install -y git-core language-pack-en python3.5 python3-pip python3.5-dev \
-  build-essential libffi-dev libmysqlclient-dev libxml2-dev libxslt-dev libjpeg-dev libssl-dev && \
-  pip3 install nodeenv && \
-  pip3 install --upgrade pip setuptools && \
-  rm -rf /var/lib/apt/lists/*
+RUN apt update && DEBIAN_FRONTEND=noninteractive \
+  apt install -y git-core \
+  tzdata \
+  language-pack-en \
+  python3-pip \
+  python3.8-dev \
+  build-essential \
+  libffi-dev \
+  libmysqlclient-dev \
+  libxml2-dev \
+  libxslt-dev \
+  libjpeg-dev \
+  libssl-dev && \
+  pip3 install pip==20.2.3 nodeenv setuptools==50.3.0
 
-RUN ln -s /usr/bin/pip3 /usr/bin/pip
-RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN rm -rf /var/lib/apt/lists/*
 
-RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+ENV TZ=America/Santiago
+RUN locale-gen en_US.UTF-8
 
 COPY . /edx/app/discovery
 WORKDIR /edx/app/discovery
 
 ENV DISCOVERY_CFG /edx/etc/discovery.yml
 
-RUN nodeenv /edx/app/nodeenv --node=8.9.3 --prebuilt
+RUN nodeenv /edx/app/nodeenv --node=12.11.1 --prebuilt
 ENV PATH /edx/app/nodeenv/bin:${PATH}
+
+# Link for old python scripts
+RUN ln -s /usr/bin/pip3 /usr/bin/pip
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN pip install -r requirements.txt
 RUN npm install --production
