@@ -49,10 +49,16 @@ COPY requirements/ requirements/
 RUN make production-requirements \
   && pip install python-json-logger==0.1.11
 
+# Adding placeholders
+COPY ./.github/eol.py ./course_discovery/settings/eol.py
+COPY ./.github/placeholder.yml /edx/etc/discovery.yml
+RUN pip install whitenoise==5.2.0
+ENV DJANGO_SETTINGS_MODULE course_discovery.settings.eol
+
+
 # Compile static files
-ENV DISCOVERY_CFG /openedx/discovery/devstack.yml
-ENV DJANGO_SETTINGS_MODULE course_discovery.settings.production
+ENV DISCOVERY_CFG /edx/etc/discovery.yml
 RUN make static
 
 EXPOSE 8000
-CMD gunicorn --name ecommerce --bind=0.0.0.0:8000 --max-requests=1000 --workers ${WORKER_COUNT:-1} course_discovery.wsgi:application
+CMD gunicorn --name ecommerce --bind=0.0.0.0:8000 --max-requests=1000 --workers 2 course_discovery.wsgi:application
