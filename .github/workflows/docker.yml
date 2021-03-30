@@ -10,12 +10,11 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Build Docker image
-        run: docker build . --file .github/Dockerfile --tag eoluchile/course-discovery:${GITHUB_SHA} --tag eoluchile/course-discovery:latest
+        run: docker build . --file .github/Dockerfile --tag ghcr.io/eol-uchile/discovery:${GITHUB_SHA}
 
       - name: Push
         run: |
           echo "${CR_PAT}" | docker login ghcr.io -u eolito --password-stdin
-          docker tag eoluchile/discovery-juniper:${GITHUB_SHA} ghcr.io/eol-uchile/discovery-juniper:${GITHUB_SHA}
-          docker push ghcr.io/eol-uchile/discovery-juniper:${GITHUB_SHA}
+          docker push ghcr.io/eol-uchile/discovery:${GITHUB_SHA}
         env:
           CR_PAT: ${{ secrets.CR_PAT }}
