@@ -4,3 +4,5 @@ from course_discovery.settings.production import *
 MIDDLEWARE += (
     'whitenoise.middleware.WhiteNoiseMiddleware',
 )
+
+LOGGING['handlers']['local'] = {'class': 'logging.NullHandler'}
