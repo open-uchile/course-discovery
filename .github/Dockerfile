@@ -61,4 +61,4 @@ ENV DISCOVERY_CFG /edx/etc/discovery.yml
 RUN make static
 
 EXPOSE 8000
-CMD gunicorn --name ecommerce --bind=0.0.0.0:8000 --max-requests=1000 --workers 2 course_discovery.wsgi:application
+CMD gunicorn --name discovery --bind=0.0.0.0:8000 --max-requests=1000 --workers 2 course_discovery.wsgi:application

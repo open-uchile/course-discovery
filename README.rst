@@ -8,6 +8,14 @@ Course Discovery Service  |Travis|_ |Codecov|_
 
 Service providing access to consolidated course and program metadata.
 
+
+EOL
+-------------
+
+This application has been changed on minor ways such as:
+- Removing partner filtering on /api/v1/course_runs
+- Adding CI/CD hooks
+
 Documentation
 -------------
 
