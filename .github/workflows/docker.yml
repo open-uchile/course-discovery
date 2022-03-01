@@ -18,3 +18,4 @@ jobs:
           docker push ghcr.io/open-uchile/discovery:${GITHUB_SHA}
         env:
           CR_PAT: ${{ secrets.CR_PAT }}
+          
